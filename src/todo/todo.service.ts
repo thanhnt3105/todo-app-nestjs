@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
+import { TodoEntity } from './entity/todo.entity';
 import { TodoDTO } from './todo.dto/todo.dto';
 
 function readFileFromDatabase() {
@@ -20,8 +21,6 @@ const database = readFileFromDatabase();
 
 @Injectable()
 export class TodoService {
-  // constructor(private readonly todoEntity: TodoEntity) {}
-
   findAll() {
     return database;
   }
@@ -30,7 +29,13 @@ export class TodoService {
     return database.find((todo) => todo.id === +id);
   }
 
-  create(task: TodoDTO) {
+  create(task: TodoEntity) {
+    const idArr = database.map((db) => db._id);
+    const max = Math.max(...idArr);
+    task.id = max + 1;
+    task.status = 1;
+    task.createdDate = new Date();
+    task.updatedDate = new Date();
     database.push(task);
     writeFileToDatabase(database);
     return database;

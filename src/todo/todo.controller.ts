@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { TodoDTO } from './todo.dto/todo.dto';
+import { toEntity } from './mapper/DTOtoEntity';
 
 @Controller('todo')
 export class TodoController {
@@ -16,8 +17,8 @@ export class TodoController {
   }
 
   @Post()
-  createTask(@Body() task: TodoDTO) {
-    return this.todoService.create(task);
+  createTask(@Body() taskRequest: TodoDTO) {
+    return this.todoService.create(toEntity(taskRequest));
   }
 
   @Delete(':id')
