@@ -20,8 +20,8 @@ export class TodoController {
     return this.todoService.create(task);
   }
 
-  // @Delete(':id')
-  // deleteTask(@Param('id') id: string) {
-  //   return this.todoService.remove(id);
-  // }
+  @Delete(':id')
+  deleteTask(@Param('id') id: string): any {
+    return this.todoService.remove(id);
+  }
 }

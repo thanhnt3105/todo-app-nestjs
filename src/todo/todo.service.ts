@@ -36,9 +36,9 @@ export class TodoService {
     return database;
   }
 
-  // remove(id: string) {
-  //   database.slice(id);
-  //   writeFileToDatabase(database);
-  //   return database;
-  // }
+  remove(id: string) {
+    const newdb = database.slice(id);
+    console.log('newdb', newdb);
+    writeFileToDatabase(newdb);
+  }
 }
