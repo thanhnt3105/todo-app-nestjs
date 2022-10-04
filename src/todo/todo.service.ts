@@ -61,9 +61,16 @@ export class TodoService {
   //   return 'something';
   // }
 
-  // remove(id: string) {
-  //   const newdb = database.slice(id, 1);
-  //   console.log('newdb', newdb);
-  //   writeFileToDatabase(newdb);
-  // }
+  remove(id: string) {
+    const task = database.find((todo: any) => todo.id === +id);
+    if (task) {
+      const idArr = database.map((todo): any => todo.id);
+      const index = idArr.indexOf(task.id);
+      database.splice(index, 1);
+      writeFileToDatabase(database);
+    } else {
+      return 'Nothing to delele';
+    }
+    return 'OK';
+  }
 }
