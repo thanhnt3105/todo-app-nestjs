@@ -26,24 +26,44 @@ export class TodoService {
   }
 
   findById(id: string) {
-    return database.find((todo) => todo.id === +id);
+    const task = database.find((todo: any) => todo.id === +id);
+    console.log('task', task);
+    if (task) {
+      return task;
+    } else return 'null';
   }
 
-  create(task: TodoEntity) {
-    const idArr = database.map((db) => db._id);
+  create(taskRequest: TodoDTO) {
+    const idArr = database.map((db: any) => db.id);
     const max = Math.max(...idArr);
-    task.id = max + 1;
-    task.status = 1;
-    task.createdDate = new Date();
-    task.updatedDate = new Date();
+    const task = new TodoEntity();
+    task.setId = max + 1;
+    task.setTaskName = taskRequest.taskName;
+    task.setStatus = 1;
+    task.setCreatedDate = new Date();
+    task.setUpdatedDate = new Date();
     database.push(task);
     writeFileToDatabase(database);
     return database;
   }
 
-  remove(id: string) {
-    const newdb = database.slice(id);
-    console.log('newdb', newdb);
-    writeFileToDatabase(newdb);
-  }
+  // updateName(id: string, taskNameUpdate: string) {
+  //   // const idArr = database.map((db) => db._id); //set of ID
+  //   const task: TodoEntity = database.find((t) => t.id === +id);
+  //   task.setTaskName = taskNameUpdate;
+  //   console.log('database', database);
+  //   // const updateUser =
+  //   // idArr.find()
+  //   return null;
+  // }
+
+  // updateStatus(id: string) {
+  //   return 'something';
+  // }
+
+  // remove(id: string) {
+  //   const newdb = database.slice(id, 1);
+  //   console.log('newdb', newdb);
+  //   writeFileToDatabase(newdb);
+  // }
 }
