@@ -1,47 +1,47 @@
 export class TodoEntity {
-  private _id: number;
-  private _taskName: string;
-  private _status: number;
-  private _createdDate: Date;
-  private _updatedDate: Date;
+  private id: number;
+  private taskName: string;
+  private status: number;
+  private createdDate: Date;
+  private updatedDate: Date;
 
-  public get id(): number {
-    return this._id;
+  public get getId(): number {
+    return this.id;
   }
 
-  public set id(theId: number) {
-    this._id = theId;
+  public set setId(theId: number) {
+    this.id = theId;
   }
 
-  public get taskName(): string {
-    return this._taskName;
+  public get getTaskName(): string {
+    return this.taskName;
   }
 
-  public set taskName(theTaskName: string) {
-    this._taskName = theTaskName;
+  public set setTaskName(theTaskName: string) {
+    this.taskName = theTaskName;
   }
 
-  public get status(): number {
-    return this._status;
+  public get getStatus(): number {
+    return this.status;
   }
 
-  public set status(theStatus: number) {
-    this._status = theStatus;
+  public set setStatus(theStatus: number) {
+    this.status = theStatus;
   }
 
-  public get createdDate(): Date {
-    return this._createdDate;
+  public get getCreatedDate(): Date {
+    return this.createdDate;
   }
 
-  public set createdDate(theCreatedDate) {
-    this._createdDate = theCreatedDate;
+  public set setCreatedDate(theCreatedDate: Date) {
+    this.createdDate = theCreatedDate;
   }
 
-  public get updatedDate(): Date {
-    return this._updatedDate;
+  public get getUpdatedDate(): Date {
+    return this.updatedDate;
   }
 
-  public set updatedDate(theUpdatedDate) {
-    this._updatedDate = theUpdatedDate;
+  public set setUpdatedDate(theUpdatedDate: Date) {
+    this.updatedDate = theUpdatedDate;
   }
 }
