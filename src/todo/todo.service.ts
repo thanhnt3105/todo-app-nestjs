@@ -47,19 +47,26 @@ export class TodoService {
     return database;
   }
 
-  // updateName(id: string, taskNameUpdate: string) {
-  //   // const idArr = database.map((db) => db._id); //set of ID
-  //   const task: TodoEntity = database.find((t) => t.id === +id);
-  //   task.setTaskName = taskNameUpdate;
-  //   console.log('database', database);
-  //   // const updateUser =
-  //   // idArr.find()
-  //   return null;
-  // }
+  updateName(id: string, taskNameUpdate: TodoDTO) {
+    // const idArr = database.map((db) => db._id); //set of ID
+    const task = database.find((todo: any) => todo.id === +id);
+    if (task) {
+      task.taskName = taskNameUpdate.taskName;
+      task.updatedDate = new Date();
+      writeFileToDatabase(database);
+      return database;
+    } else return 'Cannot find id';
+  }
 
-  // updateStatus(id: string) {
-  //   return 'something';
-  // }
+  updateStatus(id: string) {
+    const task = database.find((todo: any) => todo.id === +id);
+    if (task) {
+      task.status = 0;
+      task.updatedDate = new Date();
+      writeFileToDatabase(database);
+      return database;
+    } else return 'Cannot find id';
+  }
 
   remove(id: string) {
     const task = database.find((todo: any) => todo.id === +id);
@@ -68,9 +75,9 @@ export class TodoService {
       const index = idArr.indexOf(task.id);
       database.splice(index, 1);
       writeFileToDatabase(database);
+      return 'OK';
     } else {
       return 'Nothing to delele';
     }
-    return 'OK';
   }
 }

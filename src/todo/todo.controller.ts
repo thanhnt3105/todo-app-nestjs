@@ -28,10 +28,15 @@ export class TodoController {
     return this.todoService.create(taskRequest);
   }
 
-  // @Put(':id')
-  // updateTaskName(@Param('id') @Body('taskName') id: string, taskName: string) {
-  //   return this.todoService.updateName(id, taskName);
-  // }
+  @Put('name/:id')
+  updateTaskName(@Param('id') id: string, @Body() taskName: TodoDTO) {
+    return this.todoService.updateName(id, taskName);
+  }
+
+  @Put('status/:id')
+  updateTaskStatus(@Param('id') id: string) {
+    return this.todoService.updateStatus(id);
+  }
 
   @Delete(':id')
   deleteTask(@Param('id') id: string) {
